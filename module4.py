@@ -12,14 +12,14 @@ def search_data(search_emp_id):                                 #Function to sea
     flag=False
     for i in range(2,sheet.max_row+1):
         if(sheet.cell(row=i,column=1).value==int(search_emp_id)):                       
-            message= ("Employee ID: " + search_emp_id +"\nFirst Name: " + sheet.cell(row=i,column=2).value+ "\nLast Name: " + sheet.cell(row=i,column=3).value +
+            message = ("Employee ID: " + search_emp_id +"\nFirst Name: " + sheet.cell(row=i,column=2).value+ "\nLast Name: " + sheet.cell(row=i,column=3).value +
             "\nCity: " + sheet.cell(row=i,column=4).value + "\nZip: " + str(sheet.cell(row=i,column=5).value) + "\nPhone number: " + sheet.cell(row=i,column=6).value ) 
             #These above statement returns all the value in a single string- This can be done better but I couldn't find how.
-            flag=True
+            flag = True
             return message
             
 
-    if (flag==False):                               #If no entry is found with that employee ID
+    if (flag == False):                               #If no entry is found with that employee ID
         return("Sorry, No data found with that employee ID.")
 
 def searchInstance():

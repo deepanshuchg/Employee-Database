@@ -36,8 +36,8 @@ def deleteInstance():
     user_entry.place(x =350, y = 200, anchor = CENTER)
 
     def clicked():
-        emp_id=user_entry.get()
-        message=del_data(emp_id)                    #Calling del function which will return a message based on entry is found or not
+        emp_id = user_entry.get()
+        message = del_data(emp_id)                    #Calling del function which will return a message based on entry is found or not
         lb2.configure(text=message)
 
     Button (root1, text="DELETE", width=60,command=clicked).place(x =350, y = 300, anchor = CENTER)

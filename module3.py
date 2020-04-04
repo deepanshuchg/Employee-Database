@@ -1,5 +1,5 @@
 from tkinter import Tk, Button, Label, Entry, CENTER, END
-import openpyxl
+import openpyxl, re
 #pip install --user -U openpyxl==2.6.2
 
 
@@ -9,7 +9,9 @@ sheet = wb.active                                               #Connects with t
 #contains tkinter configs
 
 
-
+def isValid(s): 
+	Pattern = re.compile(r'\d\d\d-\d\d\d-\d\d\d\d')             #Regex for US style phone number
+	return Pattern.match(s) 
     
 
 def add_data(first_name,last_name,state,zip,phone):                     #This function will add the data in the spreadsheet
@@ -29,7 +31,7 @@ def newInstance():
     lb1.place(x =350, y = 100, anchor = CENTER)
 
     lb2= Label(root1,text="", bg = '#0084FF' ,fg="white", font="Futura 20 bold")            #This label will display message when the data is added succesfully
-    lb2.place(x=280,y=420)
+    lb2.place(x=200,y=420)
 
     Label(root1,text="First Name:",bg = '#0084FF' ,fg="white", font="Futura 12 bold").place(x=230,y=200,anchor=CENTER)
     user_entry1 = Entry(root1, width=20, bg="white")
@@ -49,40 +51,31 @@ def newInstance():
 
     Label(root1,text="Phone Number:",bg = '#0084FF' ,fg="white", font="Futura 12 bold").place(x=230,y=320,anchor=CENTER)
     user_entry5 = Entry(root1, width=20, bg="white")
+    user_entry5.insert(0,"999-999-9999")
     user_entry5.place(x =360, y = 320, anchor = CENTER)
 
     def clicked():
-        first_name= user_entry1.get()                           #This section takes the input values from the text boxes
-        last_name= user_entry2.get()
-        state= user_entry3.get()
-        zip= user_entry4.get()
-        phone= user_entry5.get()
 
-        lb2.configure(text= "Entry added!")                     #Display confirmation message
+        first_name = user_entry1.get()                           #This section takes the input values from the text boxes
+        last_name = user_entry2.get()
+        state = user_entry3.get()
+        zip = user_entry4.get()
+        phone = user_entry5.get()
 
         user_entry1.delete(0, END)                               #Clear the values of the text boxes   
         user_entry2.delete(0, END)
         user_entry3.delete(0, END)
         user_entry4.delete(0, END)
         user_entry5.delete(0, END)
-        add_data(first_name,last_name,state,int(zip),phone)        #Call the function to add values
+
+        if len(zip)==5 and isValid(phone):                              #This will validate zip code and phone number are valid
+            add_data(first_name,last_name,state,int(zip),phone)        #Call the function to add values
+            lb2.configure(text= "Entry added!")                   #Display confirmation message
+        
+        else:
+            lb2.configure(text="Zip code or Phone number is invalid. Please enter the data again.", font="Futura 12 bold")
+
 
     Button (root1, text="Press to add a new Entry", width=60, command = clicked).place(x =350, y = 390, anchor = CENTER)
 
     return root1.mainloop()
-
-#To add an event to the button follow the format below and add a function after the width parameter
-#Button (root1, text="NEW ENTRY", width=60, command = {Function}).place(x =350, y = 300, anchor = CENTER)
-
-#below is what the code could look like
-
-#def click(): 
-    #gets textbox text
-    #user_entry=text_entry.get()
-    #clears textbox
-    #text_output.delete(0.0, END)
-    #try:
-        #definition = my_dictionary[user_entry]
-    #except:
-        #definition = "sorry there is no word like that please try again"
-    #text_output.insert(END, definition)
