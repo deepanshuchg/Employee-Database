@@ -3,13 +3,12 @@ import openpyxl, re
 #pip install --user -U openpyxl==2.6.2
 
 
-wb = openpyxl.load_workbook('employee_data_2.xlsx')               #This connected with the excel file
+wb = openpyxl.load_workbook('employee_data_2.xlsx')               #This connects with the excel file
 sheet = wb.active                                               #Connects with the active sheet
 #module3--Adding new entry   
-#contains tkinter configs
 
 
-def isValid(s): 
+def isValid(s):                                                 #Validating Phone number
 	Pattern = re.compile(r'\d\d\d-\d\d\d-\d\d\d\d')             #Regex for US style phone number
 	return Pattern.match(s) 
     
@@ -27,14 +26,14 @@ def newInstance():
     root1.geometry('700x600')
     root1.configure(background ='#0084FF')
 
-    lb1= Label (root1, text ="New Entry", bg = '#0084FF' ,fg="white", font="Futura 20 bold")
+    lb1= Label (root1, text ="New Entry", bg = '#0084FF' ,fg="white", font="Futura 20 bold")            #Heading
     lb1.place(x =350, y = 100, anchor = CENTER)
 
     lb2= Label(root1,text="", bg = '#0084FF' ,fg="white", font="Futura 20 bold")            #This label will display message when the data is added succesfully
     lb2.place(x=200,y=420)
 
-    Label(root1,text="First Name:",bg = '#0084FF' ,fg="white", font="Futura 12 bold").place(x=230,y=200,anchor=CENTER)
-    user_entry1 = Entry(root1, width=20, bg="white")
+    Label(root1,text="First Name:",bg = '#0084FF' ,fg="white", font="Futura 12 bold").place(x=230,y=200,anchor=CENTER)      #Label for text "First Name"
+    user_entry1 = Entry(root1, width=20, bg="white")                                                                        #Text box for First Name
     user_entry1.place(x =360, y = 200, anchor = CENTER)
 
     Label(root1,text="Last Name:",bg = '#0084FF' ,fg="white", font="Futura 12 bold").place(x=230,y=230,anchor=CENTER)
@@ -51,10 +50,10 @@ def newInstance():
 
     Label(root1,text="Phone Number:",bg = '#0084FF' ,fg="white", font="Futura 12 bold").place(x=230,y=320,anchor=CENTER)
     user_entry5 = Entry(root1, width=20, bg="white")
-    user_entry5.insert(0,"999-999-9999")
+    user_entry5.insert(0,"999-999-9999")                            #Putting the format in which phone number is to be added. Tkinter doesn't support placeholder
     user_entry5.place(x =360, y = 320, anchor = CENTER)
 
-    def clicked():
+    def clicked():                                               #Function when the button is pressed
 
         first_name = user_entry1.get()                           #This section takes the input values from the text boxes
         last_name = user_entry2.get()
@@ -76,6 +75,6 @@ def newInstance():
             lb2.configure(text="Zip code or Phone number is invalid. Please enter the data again.", font="Futura 12 bold")
 
 
-    Button (root1, text="Press to add a new Entry", width=60, command = clicked).place(x =350, y = 390, anchor = CENTER)
+    Button (root1, text="Press to add a new Entry", width=60, command = clicked).place(x =350, y = 390, anchor = CENTER)            #Button object
 
     return root1.mainloop()

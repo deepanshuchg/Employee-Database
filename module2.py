@@ -25,8 +25,8 @@ def mainInstance():
 
     return root.mainloop()
 
-#To add an event to the button follow the format below and add a function after the width parameter
-#Button (root1, text="NEW ENTRY", width=60, command = {Function}).place(x =350, y = 300, anchor = CENTER)
+#Program starts from here
+main_screen = mainInstance()
 
 
 
