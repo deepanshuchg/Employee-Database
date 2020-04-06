@@ -4,7 +4,7 @@ import openpyxl
 #module4--Search Employee
 
 
-wb = openpyxl.load_workbook('employee_data_2.xlsx')               #This connected with the excel file
+wb = openpyxl.load_workbook('employee_data_2.xlsx', read_only=True)               #This connected with the excel file
 sheet = wb.active                                               #Connects with the active sheet
 
 

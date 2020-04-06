@@ -9,7 +9,7 @@ sheet = wb.active                                               #Connects with t
 
 
 def isValid(s):                                                 #Validating Phone number
-	Pattern = re.compile(r'\d\d\d-\d\d\d-\d\d\d\d')             #Regex for US style phone number
+	Pattern = re.compile(r'\d{3}-\d{3}-\d{4}')             #Regex for US style phone number
 	return Pattern.match(s) 
     
 
@@ -33,41 +33,42 @@ def newInstance():
     lb2.place(x=200,y=420)
 
     Label(root1,text="First Name:",bg = '#0084FF' ,fg="white", font="Futura 12 bold").place(x=230,y=200,anchor=CENTER)      #Label for text "First Name"
-    user_entry1 = Entry(root1, width=20, bg="white")                                                                        #Text box for First Name
-    user_entry1.place(x =360, y = 200, anchor = CENTER)
+    fname_entry = Entry(root1, width=20, bg="white")                                                                        #Text box for First Name
+    fname_entry.place(x =360, y = 200, anchor = CENTER)
 
     Label(root1,text="Last Name:",bg = '#0084FF' ,fg="white", font="Futura 12 bold").place(x=230,y=230,anchor=CENTER)
-    user_entry2 = Entry(root1, width=20, bg="white")
-    user_entry2.place(x =360, y = 230, anchor = CENTER)
+    lname_entry = Entry(root1, width=20, bg="white")
+    lname_entry.place(x =360, y = 230, anchor = CENTER)
 
     Label(root1,text="State:",bg = '#0084FF' ,fg="white", font="Futura 12 bold").place(x=230,y=260,anchor=CENTER)
-    user_entry3 = Entry(root1, width=20, bg="white")
-    user_entry3.place(x =360, y = 260, anchor = CENTER)
+    state_entry = Entry(root1, width=20, bg="white")
+    state_entry.place(x =360, y = 260, anchor = CENTER)
 
     Label(root1,text="Zip Code:",bg = '#0084FF' ,fg="white", font="Futura 12 bold").place(x=230,y=290,anchor=CENTER)
-    user_entry4 = Entry(root1, width=20, bg="white")
-    user_entry4.place(x =360, y = 290, anchor = CENTER)
+    zip_entry = Entry(root1, width=20, bg="white")
+    zip_entry.place(x =360, y = 290, anchor = CENTER)
 
     Label(root1,text="Phone Number:",bg = '#0084FF' ,fg="white", font="Futura 12 bold").place(x=230,y=320,anchor=CENTER)
-    user_entry5 = Entry(root1, width=20, bg="white")
-    user_entry5.insert(0,"999-999-9999")                            #Putting the format in which phone number is to be added. Tkinter doesn't support placeholder
-    user_entry5.place(x =360, y = 320, anchor = CENTER)
+    phone_entry = Entry(root1, width=20, bg="white")
+    phone_entry.insert(0,"999-999-9999")                            #Putting the format in which phone number is to be added. Tkinter doesn't support placeholder
+    phone_entry.place(x =360, y = 320, anchor = CENTER)
 
     def clicked():                                               #Function when the button is pressed
 
-        first_name = user_entry1.get()                           #This section takes the input values from the text boxes
-        last_name = user_entry2.get()
-        state = user_entry3.get()
-        zip = user_entry4.get()
-        phone = user_entry5.get()
+        first_name = fname_entry.get()                           #This section takes the input values from the text boxes
+        last_name = lname_entry.get()
+        state = state_entry.get()
+        zip = zip_entry.get()
+        phone = phone_entry.get()
 
-        user_entry1.delete(0, END)                               #Clear the values of the text boxes   
-        user_entry2.delete(0, END)
-        user_entry3.delete(0, END)
-        user_entry4.delete(0, END)
-        user_entry5.delete(0, END)
+        zip_entry.delete(0, END)
+        phone_entry.delete(0, END)
 
-        if len(zip)==5 and isValid(phone):                              #This will validate zip code and phone number are valid
+        if len(zip)==5 and isValid(phone):                             #This will validate zip code and phone number are valid
+            fname_entry.delete(0, END)                               #Clear the values of the text boxes   
+            lname_entry.delete(0, END)
+            state_entry.delete(0, END)
+            
             add_data(first_name,last_name,state,int(zip),phone)        #Call the function to add values
             lb2.configure(text= "Entry added!")                   #Display confirmation message
         
